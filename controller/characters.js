@@ -50,7 +50,7 @@ function queryCharacter(req, res) {
     }
     
     if(queries.length > 1) {
-      Character.find({ $or: queries }, 'Name ImageUrl', function (error, characters) {
+      Character.find({ $or: queries }, 'Name ImageUrl AvatarUrl', function (error, characters) {
         if (error) { console.error(error); }
         res.send({
           characters: characters
@@ -58,7 +58,7 @@ function queryCharacter(req, res) {
       }).sort({ Name: 1 })    
     }
     else {
-      Character.find(queries[0], 'Name ImageUrl', function (error, characters) {
+      Character.find(queries[0], 'Name ImageUrl AvatarUrl', function (error, characters) {
         if (error) { console.error(error); }
         res.send({
           characters: characters
@@ -69,7 +69,7 @@ function queryCharacter(req, res) {
   
   // Fetch all characters
 function getCharacters(req, res) {
-    Character.find({}, 'Name GameId ImageUrl ', function (error, characters) {
+    Character.find({}, 'Name GameId ImageUrl AvatarUrl', function (error, characters) {
       if (error) { console.error(error); }
       res.send({
         characters: characters
@@ -80,7 +80,7 @@ function getCharacters(req, res) {
   // Fetch single character
 function getCharacter(req, res) {
     var db = req.db;
-    Character.findById(req.params.id, 'Name GameId ImageUrl', function (error, character) {
+    Character.findById(req.params.id, 'Name GameId ImageUrl AvatarUrl', function (error, character) {
       if (error) { console.error(error); }
       res.send(character)
     })
